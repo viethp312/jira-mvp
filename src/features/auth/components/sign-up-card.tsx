@@ -24,11 +24,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-// import { useRegister } from "../api/use-register";
+import { useRegister } from "../api/use-register";
 import { signupSchema } from "../schemas";
 
 export const SignUpCard = () => {
-  // const { mutate, isPending } = useRegister();
+  const { mutate, isPending } = useRegister();
   const form = useForm<z.infer<typeof signupSchema>>({
     resolver: zodResolver(signupSchema),
     defaultValues: {
@@ -39,7 +39,7 @@ export const SignUpCard = () => {
   });
 
   const onSubmit = (values: z.infer<typeof signupSchema>) => {
-    // mutate({ json: values });
+    mutate({ json: values });
   };
   return (
     <Card className="w-full h-full md:w-[487px] border-none shadow-none">
@@ -111,7 +111,7 @@ export const SignUpCard = () => {
               )}
             />
 
-            <Button disabled={false} size="lg" className="w-full">
+            <Button disabled={isPending} size="lg" className="w-full">
               Sign Up
             </Button>
           </form>
@@ -122,7 +122,7 @@ export const SignUpCard = () => {
       </div>
       <CardContent className="p-7 flex flex-col gap-y-4">
         <Button
-          disabled={false}
+          disabled={isPending}
           variant="secondary"
           size="lg"
           className="w-full"
@@ -131,7 +131,7 @@ export const SignUpCard = () => {
           Login with Google
         </Button>
         <Button
-          disabled={false}
+          disabled={isPending}
           variant="secondary"
           size="lg"
           className="w-full"
