@@ -1,8 +1,12 @@
+import { redirect } from "next/navigation";
+
+import { getCurrent } from "@/features/auth/actions";
 import { SignInCard } from "@/features/auth/components/sign-in-card";
 
-type Props = {};
+async function SignInPage() {
+  const user = await getCurrent();
+  if (user) redirect("/");
 
-function SignInPage({}: Props) {
   return <SignInCard />;
 }
 
